@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Productos en Botellas Plásticas</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .producto {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .producto img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .oferta {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .ver-imagen {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        .ver-imagen:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para el modal de la imagen */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        .modal-content, #caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Responsive layout - makes a two column layout instead of three columns */
+        @media screen and (max-width: 800px) {
+            .galeria {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Responsive layout - makes one column */
+        @media screen and (max-width: 600px) {
+            .galeria {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Galería de Productos en Botellas Plásticas</h1>
+
+    <div class="galeria">
+        <div class="producto">
+            <img src="imagenes/imagen1.png" alt="Producto 1">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen1.png', 'Tecnología de tapa anti-derrame, garantizando que cada gota se mantenga segura en su interior')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen2.png" alt="Producto 2">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen2.png', 'Disfruta del sabor inconfundible y refrescante del ginger ale de Schweppes en este práctico paquete de 8 botellas plásticas')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen3.png" alt="Producto 3">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen3.png', 'Este conjunto de productos de limpieza ofrece una solución completa para mantener tu hogar impecable')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen4.png" alt="Producto 4">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen4.png', 'Jugo Natural de Cereza con Tapa de Seguridad')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen5.png" alt="Producto 5">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen5.png', 'Colección de Botellas Plásticas Multi-color y Multi-tamaño')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen6.png" alt="Producto 6">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen6.png', 'Disfruta del sabor natural y refrescante del jugo de toronja Acuabendita Paloma, disponible en una variedad de tamaños')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen7.png" alt="Producto 7">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen7.png', 'Este es un jarabe artificial de fresa de la marca Sirop, ideal para dar un toque dulce y frutal a tus creaciones de repostería y coctelería')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen8.png" alt="Producto 8">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen8.png', 'Este completo kit es ideal para cualquier amante de la coctelería o para la preparación de jarabes en casa')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen9.png" alt="Producto 9">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen9.png', 'Envases Sostenibles y de Origen Vegetal')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen10.png" alt="Producto 10">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen10.png', ' jugos prensados en frío, envasados en botellas plásticas individuales y listos para llevar')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen11.png" alt="Producto 11">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen11.png', 'Este conjunto de botellas de plástico, con un diseño similar y tapas blancas, contiene una variedad de bebidas en tonos rojos, naranjas y amarillos')">Ver imagen</button>
+        </div>
+        <div class="producto">
+            <img src="imagenes/imagen12.png" alt="Producto 12">
+            <div class="oferta">Producto de oferta</div>
+            <button class="ver-imagen" onclick="mostrarModal('imagenes/imagen12.png', 'Estas bebidas son ideales para quienes buscan una opción refrescante y con un toque de sabor afrutado, perfectas para compartir en reuniones o simplemente para disfrutar en cualquier momento.')">Ver imagen</button>
+        </div>
+    </div>
+
+    <div id="modalImagen" class="modal">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <img class="modal-content" id="imgModal">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        function mostrarModal(src, alt) {
+            const modal = document.getElementById("modalImagen");
+            const modalImg = document.getElementById("imgModal");
+            const captionText = document.getElementById("caption");
+            modal.style.display = "block";
+            modalImg.src = src;
+            captionText.innerHTML = alt;
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById("modalImagen");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
+```

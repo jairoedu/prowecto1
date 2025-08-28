@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0; 
+            /* Configuración de la imagen de fondo de la carátula */
+            background-image: url('imagen.porta/imagen1.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center center;
+            background-repeat: no-repeat;
+            /* Eliminamos el color de fondo oscuro aquí para que la imagen se vea completa */
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Alinea el contenido (el botón) al final (abajo) */
+            align-items: center;
+            text-align: center;
+            /* Eliminamos la capa semitransparente oscura */
+            /* background-color: rgba(0, 0, 0, 0.6); */ 
+            padding: 20px;
+            padding-bottom: 50px; /* Añade un poco de espacio desde la parte inferior */
+        }
+
+        .link-button {
+            background-color: #175a99;
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .link-button:hover {
+            background-color: #61a7f8;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <a href="paguina_inicio.html" class="link-button">INGRESAR</a>
+    </section>
+</body>
+</html>

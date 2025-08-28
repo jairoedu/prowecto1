@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0; /* Color de texto claro */
+            /* Configuración de la imagen de fondo para la página de deberes */
+            background-image: url('imagen.porta/imagen2.png'); /* ¡REEMPLAZA con la URL/ruta de tu imagen para los deberes! */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        
+        .main-content {
+            height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* Capa semitransparente oscura sobre la imagen */
+            background-color: rgba(0, 0, 0, 0.7); 
+            padding: 20px;
+        }
+
+        h1 {
+            color: #0c0a0a; /* Color de título de acento */
+            font-size: 2.8em;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .opciones-deber {
+            display: flex;
+            gap: 25px; /* Espacio entre los botones de deberes */
+            flex-wrap: wrap; /* Permite que los botones salten de línea en pantallas pequeñas */
+            justify-content: center;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        .link-deber {
+            background-color: #0f3460; /* Fondo de los botones de deber */
+            color: white;
+            padding: 22px 45px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.6em;
+            font-weight: bold;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
+            flex-grow: 1; /* Permite que los botones se estiren un poco */
+            min-width: 200px; /* Ancho mínimo para que no se hagan muy pequeños */
+        }
+
+        .link-deber:hover {
+            background-color: #16213e; /* Fondo de los botones al pasar el ratón */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <section class="main-content">
+        <div class="opciones-deber">
+            <a href="deber1.html" class="link-deber">Deber 1</a>
+            <a href="tarea1.html" class="link-deber">Deber 2</a>
+            
+        </div>
+    </section>
+</body>
+</html>

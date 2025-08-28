@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Tabla Dinámica Moderna</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e; /* Fondo oscuro moderno */
+            color: #e0e0e0; /* Texto claro */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #0f3460; /* Contenedor principal */
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #e94560; /* Color de acento para el título */
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #a0a0a0;
+            margin-right: 5px;
+        }
+
+        .form-group input[type="number"] {
+            padding: 10px 15px;
+            border: 1px solid #16213e;
+            border-radius: 8px;
+            background-color: #0a1128;
+            color: #e0e0e0;
+            width: 80px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .form-group button {
+            background-color: #e94560; /* Botón de acento */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .form-group button:hover {
+            background-color: #c9354f;
+            transform: translateY(-2px);
+        }
+
+        #contenedorTabla {
+            margin-top: 30px;
+            overflow-x: auto; /* Permite scroll horizontal si la tabla es muy ancha */
+            max-height: 50vh; /* Limita la altura de la tabla */
+            overflow-y: auto; /* Permite scroll vertical */
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.9em;
+            background-color: #16213e; /* Fondo de la tabla */
+            border-radius: 8px;
+            overflow: hidden; /* Asegura que los bordes redondeados se apliquen */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #0f3460; /* Bordes de celdas más suaves */
+            text-align: center;
+            white-space: nowrap; /* Evita que el texto de las celdas se rompa */
+        }
+
+        th {
+            background-color: #e94560; /* Encabezados de tabla */
+            color: white;
+            font-weight: bold;
+            position: sticky; /* Encabezado fijo al hacer scroll */
+            top: 0;
+            z-index: 1;
+        }
+
+        /* Estilos para las celdas generadas - se sobreescribirán por JS */
+        tr:nth-child(even) {
+            background-color: #1a1a2e; /* Filas pares */
+        }
+        tr:nth-child(odd) {
+            background-color: #0f3460; /* Filas impares */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Generador de Tabla Dinámica</h1>
+
+        <div class="form-group">
+            <label for="filas">Filas:</label>
+            <input type="number" id="filas" value="5" min="1" max="50">
+
+            <label for="columnas">Columnas:</label>
+            <input type="number" id="columnas" value="5" min="1" max="20">
+
+            <button onclick="generarTabla()">Generar Tabla</button>
+        </div>
+
+        <div id="contenedorTabla">
+            </div>
+    </div>
+
+    <script>
+        function generarTabla() {
+            const numFilas = document.getElementById('filas').value;
+            const numColumnas = document.getElementById('columnas').value;
+            const contenedorTabla = document.getElementById('contenedorTabla');
+
+            // Colores más modernos y armónicos (paleta inspirada en un tema oscuro)
+            const coloresFondo = [
+                '#4a148c', // Púrpura oscuro
+                '#1a237e', // Azul índigo oscuro
+                '#004d40', // Verde azulado oscuro
+                '#bf360c', // Naranja quemado oscuro
+                '#880e4f', // Magenta oscuro
+                '#01579b', // Azul cian oscuro
+                '#33691e', // Verde oliva oscuro
+                '#e65100', // Naranja vibrante oscuro
+                '#b71c1c'  // Rojo oscuro
+            ];
+
+            const coloresTexto = [
+                '#f3e5f5', // Lila claro
+                '#e8eaf6', // Azul muy claro
+                '#e0f2f1', // Verde azulado muy claro
+                '#fbe9e7', // Naranja muy claro
+                '#fce4ec', // Rosa muy claro
+                '#e1f5fe', // Azul muy claro brillante
+                '#f1f8e9', // Verde muy claro
+                '#fff3e0', // Naranja claro
+                '#ffebee'  // Rojo claro
+            ];
+
+            // Limpiar el contenedor antes de generar una nueva tabla
+            contenedorTabla.innerHTML = '';
+
+            const tabla = document.createElement('table');
+            const tbody = document.createElement('tbody');
+
+            for (let i = 0; i < numFilas; i++) {
+                const fila = document.createElement('tr');
+                for (let j = 0; j < numColumnas; j++) {
+                    const celda = document.createElement('td');
+
+                    // Seleccionar un color de fondo aleatorio
+                    let fondoIndex = Math.floor(Math.random() * coloresFondo.length);
+                    let colorFondo = coloresFondo[fondoIndex];
+
+                    // Seleccionar un color de texto aleatorio
+                    let textoIndex = Math.floor(Math.random() * coloresTexto.length);
+                    let colorTexto = coloresTexto[textoIndex];
+                    
+                    // Asegurarse de que el color de fondo y el color de texto no sean los mismos si la paleta es la misma
+                    // Aunque con las paletas separadas esto es menos probable, es una buena práctica
+                    while (colorFondo === colorTexto && coloresFondo.includes(colorTexto)) {
+                        textoIndex = Math.floor(Math.random() * coloresTexto.length);
+                        colorTexto = coloresTexto[textoIndex];
+                    }
+
+                    celda.style.backgroundColor = colorFondo;
+                    celda.style.color = colorTexto;
+                    celda.textContent = `F${i+1}C${j+1}`; // Contenido de ejemplo
+                    fila.appendChild(celda);
+                }
+                tbody.appendChild(fila);
+            }
+            tabla.appendChild(tbody);
+            contenedorTabla.appendChild(tabla);
+        }
+
+        // Generar una tabla inicial al cargar la página
+        document.addEventListener('DOMContentLoaded', generarTabla);
+    </script>
+
+</body>
+</html>
