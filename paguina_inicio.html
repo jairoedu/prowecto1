@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deberes y Ejercicios</title>
     <style>
-        /* Estilos para la imagen de fondo */
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Hace que la imagen cubra toda la pantalla sin espacios vacíos */
-            z-index: -1; /* Envía la imagen detrás del contenido */
-        }
-
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #e0e0e0;
+            background-image: url('imagen.porta/imagen2.png'); /* Ruta de tu imagen de fondo */
+            background-size: contain; /* ¡CAMBIO CLAVE: ajusta la imagen para que quepa completamente! */
+            background-repeat: no-repeat; /* Para que la imagen no se repita */
+            background-position: center center; /* Centra la imagen */
+            background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+            background-color: #000000; /* ¡MUY IMPORTANTE! Rellena los espacios vacíos con este color si 'contain' deja barras */
         }
         
         /* Contenedor principal para toda la página */
@@ -33,7 +28,7 @@
             background-color: rgba(0, 0, 0, 0.7); /* Capa semitransparente sobre la imagen */
             padding: 20px;
             box-sizing: border-box;
-            position: relative; /* Necesario para que el z-index funcione correctamente */
+            position: relative;
             z-index: 1; /* Asegura que el contenido esté por encima del fondo */
         }
 
@@ -84,7 +79,7 @@
             transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
             width: 100%; /* El botón ocupa todo el ancho de su columna */
             text-align: center;
-            box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+            box-sizing: border-box;
         }
         
         .link-button:hover {
@@ -102,8 +97,6 @@
     </style>
 </head>
 <body>
-    <img src="imagen.porta/imagen2.png" alt="Fondo de deberes" class="background-image">
-    
     <section class="page-container">
         <h1>Deberes y Ejercicios</h1>
         
