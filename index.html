@@ -8,10 +8,10 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #e0e0e0; 
+            color: #e0e0e0;
             /* Configuración de la imagen de fondo de la carátula */
             background-image: url('imagen.porta/imagen1.png');
-            background-size: cover;
+            background-size: contain; /* Este es el cambio que hace que la imagen se ajuste */
             background-attachment: fixed;
             background-position: center center;
             background-repeat: no-repeat;
@@ -26,7 +26,7 @@
             align-items: center;
             text-align: center;
             /* Eliminamos la capa semitransparente oscura */
-            /* background-color: rgba(0, 0, 0, 0.6); */ 
+            /* background-color: rgba(0, 0, 0, 0.6); */
             padding: 20px;
             padding-bottom: 50px; /* Añade un poco de espacio desde la parte inferior */
         }
@@ -48,10 +48,6 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
-        .mi-imagen {
-            max-width: 100%;
-            height: auto;
-        }
     </style>
 </head>
 <body>
@@ -60,5 +56,4 @@
     </section>
 </body>
 </html>
-/*h
 
