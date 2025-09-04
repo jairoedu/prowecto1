@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Menú, Horario y Línea de Tiempo</title>
+    
+    <style>
+        /* Estilos generales y del body */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilos del encabezado y la navegación */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .main-nav .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .main-nav .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+
+        /* Estilos para el menú desplegable */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #555;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #777;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Estilos para la sección principal */
+        main {
+            padding-top: 80px;
+            overflow-x: auto;
+            flex-grow: 1;
+        }
+        
+        .contenido-principal {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Estilos para la tabla del horario */
+        .horario-container {
+            width: 70%;
+            text-align: center;
+        }
+
+        .horario-container h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .receso-row {
+            background-color: #ffe0b2;
+            font-weight: bold;
+        }
+
+        /* Estilos para la lista de profesores */
+        .profesores-container {
+            width: 25%;
+            padding-left: 2rem;
+        }
+        
+        .profesores-container h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .profesores-container ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .profesores-container li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-left: 4px solid #333;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Estilos para la línea de tiempo */
+        .timeline-container {
+            width: 100%;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .timeline {
+            position: relative;
+            height: auto;
+            border-left: 2px solid #333;
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 40px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #333;
+            top: 0;
+            transform: translateY(-50%);
+        }
+        
+        .timeline-end::before {
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+        }
+
+        .timeline-days {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        
+        .timeline-days li {
+            margin-bottom: 5px;
+            position: relative;
+            text-align: left;
+        }
+        
+        .timeline-days li span {
+            margin-left: 15px;
+        }
+        
+        .walking-icon-day {
+            position: relative;
+            font-weight: bold;
+        }
+        
+        .walking-icon-day::before {
+            content: '\1F6B6'; /* Código Unicode para el icono de caminar */
+            position: absolute;
+            left: -42px;
+            top: -20px;
+            transform: translateY(-50%);
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        /* Media queries para diseño adaptable */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-nav .nav-links {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .main-nav .nav-links li {
+                margin: 5px 0;
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+            }
+            
+            .contenido-principal {
+                flex-direction: column;
+            }
+            
+            .horario-container, .profesores-container {
+                width: 100%;
+                padding: 0;
+            }
+
+            table {
+                font-size: 0.8rem;
+                display: block;
+            }
+            
+            thead, tbody, th, td, tr { 
+                display: block; 
+            }
+            
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            tr { border: 1px solid #ccc; }
+            
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: left;
+            }
+            
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+                color: #000;
+            }
+
+            .timeline-container {
+                padding: 1rem;
+            }
+
+            .timeline {
+                margin-left: 10px;
+                padding-left: 30px;
+                height: auto;
+            }
+
+            .timeline-item::before {
+                left: -20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Mi Logo</div>
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="#">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Galería ▼</a>
+                    <div class="dropdown-content">
+                        <a href="#">imágenes</a>
+                        <a href="#">videos</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Contactos ▼</a>
+                    <div class="dropdown-content">
+                        <a href="#">Correo</a>
+                        <a href="#">WhatsApp</a>
+                        <a href="#">Teléfono</a>
+                    </div>
+                </li>
+                <li><a href="#">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="contenido-principal">
+            <div class="horario-container">
+                <h2>Horario de Clases Semanal</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>8:00 - 9:00</td>
+                            <td rowspan="2" data-label="Lunes">Matemáticas</td>
+                            <td colspan="2" data-label="Martes-Miércoles">Ciencias</td>
+                            <td data-label="Jueves">Física</td>
+                            <td data-label="Viernes">Química</td>
+                        </tr>
+                        <tr>
+                            <td>9:00 - 10:00</td>
+                            <td data-label="Martes">Literatura</td>
+                            <td data-label="Miércoles">Geografía</td>
+                            <td colspan="2" data-label="Jueves-Viernes">Programación</td>
+                        </tr>
+                        <tr class="receso-row">
+                            <td>10:00 - 10:15</td>
+                            <td colspan="5">Receso</td>
+                        </tr>
+                        <tr>
+                            <td>10:15 - 11:15</td>
+                            <td data-label="Lunes">Inglés</td>
+                            <td data-label="Martes">Química</td>
+                            <td rowspan="2" data-label="Miércoles">Literatura</td>
+                            <td data-label="Jueves">Biología</td>
+                            <td data-label="Viernes">Música</td>
+                        </tr>
+                        <tr>
+                            <td>11:15 - 12:15</td>
+                            <td data-label="Lunes">Historia</td>
+                            <td data-label="Martes">Deportes</td>
+                            <td data-label="Jueves">Física</td>
+                            <td data-label="Viernes">Inglés</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="timeline-container">
+                    <div class="timeline">
+                        <div class="timeline-item">Inicio de Clase</div>
+                        <div class="timeline-item">Semana 1</div>
+                        <div class="timeline-item">
+                            <span class="timeline-week-title">Semana 2</span>
+                            <ul class="timeline-days">
+                                <li>Lunes</li>
+                                <li>Martes</li>
+                                <li class="walking-icon-day">Miércoles</li>
+                                <li>Jueves</li>
+                                <li>Viernes</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">Semana 3</div>
+                        <div class="timeline-item timeline-end">Fin de Clases</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profesores-container">
+                <h3>Profesores por Materia</h3>
+                <ul>
+                    <li>**Matemáticas:** Profesor Carlos Gómez</li>
+                    <li>**Ciencias:** Profesora Ana López</li>
+                    <li>**Física:** Profesor Miguel Ríos</li>
+                    <li>**Química:** Profesora Laura Torres</li>
+                    <li>**Literatura:** Profesor José Pérez</li>
+                    <li>**Geografía:** Profesora Sofía Marín</li>
+                    <li>**Programación:** Profesor Daniel Castro</li>
+                    <li>**Arte:** Profesora Elvia Muñoz</li>
+                    <li>**Música:** Profesor Juan Ruiz</li>
+                    <li>**Robótica:** Profesor Pedro Ortiz</li>
+                    <li>**Inglés:** Profesora Clara Salazar</li>
+                    <li>**Historia:** Profesor Diego Mora</li>
+                    <li>**Deportes:** Profesora Paula Castro</li>
+                    <li>**Biología:** Profesor Ernesto Gónzalez</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Desarrollado por [Jairo Aguaisa]</p>
+    </footer>
+    
+</body>
+</html>
