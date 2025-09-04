@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deberes y Ejercicios</title>
     <style>
+        /* Estilos para la imagen de fondo */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Hace que la imagen cubra toda la pantalla sin espacios vacíos */
+            z-index: -1; /* Envía la imagen detrás del contenido */
+        }
+
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #e0e0e0;
-            background-image: url('imagen.porta/imagen2.png');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center center;
-            background-repeat: no-repeat;
         }
         
         /* Contenedor principal para toda la página */
@@ -24,13 +30,15 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.7); /* Capa semitransparente sobre la imagen */
             padding: 20px;
             box-sizing: border-box;
+            position: relative; /* Necesario para que el z-index funcione correctamente */
+            z-index: 1; /* Asegura que el contenido esté por encima del fondo */
         }
 
         h1 {
-            color: #ffffff; /* Color de título claro para contrastar con el fondo oscuro */
+            color: #ffffff;
             font-size: 2.8em;
             margin-bottom: 50px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -39,21 +47,21 @@
         /* Contenedor principal de la tabla (columnas de Deberes y Ejercicios) */
         .table-layout {
             display: flex;
-            gap: 40px; /* Espacio entre las columnas */
+            gap: 40px;
             width: 100%;
             max-width: 1200px;
-            flex-wrap: wrap; /* Permite que las columnas salten de línea en pantallas pequeñas */
+            flex-wrap: wrap;
             justify-content: center;
         }
         
         /* Contenedor para cada columna (Deberes o Ejercicios) */
         .column {
-            flex: 1; /* Hace que cada columna ocupe el mismo espacio */
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px; /* Espacio entre los elementos de cada columna */
-            min-width: 300px; /* Evita que las columnas se hagan muy pequeñas */
+            gap: 20px;
+            min-width: 300px;
         }
         
         .column-title {
@@ -76,6 +84,7 @@
             transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
             width: 100%; /* El botón ocupa todo el ancho de su columna */
             text-align: center;
+            box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
         }
         
         .link-button:hover {
@@ -87,12 +96,14 @@
         /* Media query para pantallas más pequeñas (teléfonos) */
         @media (max-width: 768px) {
             .table-layout {
-                flex-direction: column; /* Apila las columnas verticalmente */
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
+    <img src="imagen.porta/imagen2.png" alt="Fondo de deberes" class="background-image">
+    
     <section class="page-container">
         <h1>Deberes y Ejercicios</h1>
         
