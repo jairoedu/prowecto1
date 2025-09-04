@@ -5,30 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido</title>
     <style>
+        /* Estilos para la imagen de fondo */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cambia 'contain' a 'cover' para que cubra toda la pantalla */
+            z-index: -1;
+        }
+
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #e0e0e0;
-            /* Configuración de la imagen de fondo de la carátula */
-            background-image: url('imagen.porta/imagen1.png');
-            background-size: contain; /* Este es el cambio que hace que la imagen se ajuste */
-            background-attachment: fixed;
-            background-position: center center;
-            background-repeat: no-repeat;
-            /* Eliminamos el color de fondo oscuro aquí para que la imagen se vea completa */
         }
 
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Alinea el contenido (el botón) al final (abajo) */
+            justify-content: flex-end;
             align-items: center;
             text-align: center;
-            /* Eliminamos la capa semitransparente oscura */
-            /* background-color: rgba(0, 0, 0, 0.6); */
             padding: 20px;
-            padding-bottom: 50px; /* Añade un poco de espacio desde la parte inferior */
+            padding-bottom: 50px;
         }
 
         .link-button {
@@ -51,9 +53,9 @@
     </style>
 </head>
 <body>
+    <img src="imagen.porta/imagen1.png" alt="Imagen de portada" class="background-image">
     <section class="hero">
         <a href="paguina_inicio.html" class="link-button">INGRESAR</a>
     </section>
 </body>
 </html>
-
