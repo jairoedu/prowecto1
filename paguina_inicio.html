@@ -3,49 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deberes y Ejercicios</title>
     <style>
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #e0e0e0; /* Color de texto claro */
-            /* Configuración de la imagen de fondo para la página de deberes */
-            background-image: url('imagen.porta/imagen2.png'); /* ¡REEMPLAZA con la URL/ruta de tu imagen para los deberes! */
+            color: #e0e0e0;
+            background-image: url('imagen.porta/imagen2.png');
             background-size: cover;
             background-attachment: fixed;
             background-position: center center;
             background-repeat: no-repeat;
         }
         
-        .main-content {
-            height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+        /* Contenedor principal para toda la página */
+        .page-container {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* Capa semitransparente oscura sobre la imagen */
-            background-color: rgba(0, 0, 0, 0.7); 
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
+            box-sizing: border-box;
         }
 
         h1 {
-            color: #0c0a0a; /* Color de título de acento */
+            color: #ffffff; /* Color de título claro para contrastar con el fondo oscuro */
             font-size: 2.8em;
             margin-bottom: 50px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         
-        .opciones-deber {
+        /* Contenedor principal de la tabla (columnas de Deberes y Ejercicios) */
+        .table-layout {
             display: flex;
-            gap: 25px; /* Espacio entre los botones de deberes */
-            flex-wrap: wrap; /* Permite que los botones salten de línea en pantallas pequeñas */
+            gap: 40px; /* Espacio entre las columnas */
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap; /* Permite que las columnas salten de línea en pantallas pequeñas */
             justify-content: center;
-            max-width: 800px;
-            width: 90%;
         }
-
-        .link-deber {
-            background-color: #0f3460; /* Fondo de los botones de deber */
+        
+        /* Contenedor para cada columna (Deberes o Ejercicios) */
+        .column {
+            flex: 1; /* Hace que cada columna ocupe el mismo espacio */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* Espacio entre los elementos de cada columna */
+            min-width: 300px; /* Evita que las columnas se hagan muy pequeñas */
+        }
+        
+        .column-title {
+            font-size: 2em;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        /* Estilos para los botones */
+        .link-button {
+            background-color: #0f3460;
             color: white;
             padding: 22px 45px;
             text-decoration: none;
@@ -54,27 +74,43 @@
             font-weight: bold;
             box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
             transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
-            flex-grow: 1; /* Permite que los botones se estiren un poco */
-            min-width: 200px; /* Ancho mínimo para que no se hagan muy pequeños */
+            width: 100%; /* El botón ocupa todo el ancho de su columna */
+            text-align: center;
         }
-
-        .link-deber:hover {
-            background-color: #16213e; /* Fondo de los botones al pasar el ratón */
+        
+        .link-button:hover {
+            background-color: #16213e;
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Media query para pantallas más pequeñas (teléfonos) */
+        @media (max-width: 768px) {
+            .table-layout {
+                flex-direction: column; /* Apila las columnas verticalmente */
+            }
         }
     </style>
 </head>
 <body>
-    <section class="main-content">
-        <div class="opciones-deber">
-            <a href="deber1.html" class="link-deber">Deber 1</a>
-            <a href="tarea1.html" class="link-deber">Deber 2</a>
-            <a href="deber3.html" class="link-deber">Deber 3</a>
-
+    <section class="page-container">
+        <h1>Deberes y Ejercicios</h1>
+        
+        <div class="table-layout">
+            <div class="column">
+                <h2 class="column-title">Deberes</h2>
+                <a href="deber1.html" class="link-button">Deber 1</a>
+                <a href="tarea1.html" class="link-button">Deber 2</a>
+                <a href="deber3.html" class="link-button">Deber 3</a>
+            </div>
             
+            <div class="column">
+                <h2 class="column-title">Ejercicios</h2>
+                <a href="ejercicio1.html" class="link-button">Ejercicio 1</a>
+                <a href="ejercicio2.html" class="link-button">Ejercicio 2</a>
+                <a href="ejercicio3.html" class="link-button">Ejercicio 3</a>
+            </div>
         </div>
     </section>
 </body>
-
 </html>
