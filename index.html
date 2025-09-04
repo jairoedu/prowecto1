@@ -6,48 +6,58 @@
     <title>Bienvenido</title>
     <style>
         /* Estilos para la imagen de fondo de la carátula */
-        .background-image {
+        /* Esta es la imagen clara y grande que cubre todo el fondo */
+        .full-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
+            z-index: -2; /* Más abajo para que no interfiera */
         }
 
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #e0e0e0;
+            /* Asegúrate de que el body no tenga un color de fondo que oculte la imagen */
+            background-color: transparent;
         }
 
-        /* ESTILOS PARA LA NUEVA IMAGEN DEL LOGO */
-        .logo-section {
+        /* ESTILOS PARA LA IMAGEN DEL LOGO Y EL TEXTO */
+        .logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box; /* Para que el padding no cause desbordamiento */
-        }
-
-        .logo-image {
-            max-width: 90%; /* Asegura que la imagen no sea más ancha que la pantalla */
-            height: auto; /* Mantiene la proporción de la imagen */
-            display: block; /* Elimina espacios extra debajo de la imagen */
-            margin-bottom: 20px; /* Espacio entre el logo y el botón */
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
+            min-height: 100vh; /* Para que ocupe al menos toda la altura de la pantalla */
             text-align: center;
             padding: 20px;
-            padding-bottom: 50px;
+            box-sizing: border-box;
+            position: relative; /* Para que el logo-container pueda tener z-index */
+            z-index: 1; /* Para que esté por encima del fondo */
+        }
+
+        .main-logo-image {
+            max-width: 90%; /* Ajusta el ancho máximo para pantallas pequeñas */
+            height: auto; /* Mantiene la proporción de la imagen */
+            display: block;
+            margin: auto; /* Centra la imagen horizontalmente */
+            /* Si la imagen es muy grande y se sale, reduce este valor */
+            /* Por ejemplo, max-width: 80%; o incluso 70%; */
+        }
+
+
+        .hero {
+            position: absolute; /* Para que el botón esté en la parte inferior */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 50px; /* Espacio desde abajo */
+            z-index: 1; /* Para que el botón esté por encima de todo */
+            box-sizing: border-box;
         }
 
         .link-button {
@@ -70,11 +80,9 @@
     </style>
 </head>
 <body>
-    <img src="imagen.porta/imagen1.png" alt="Imagen de portada" class="background-image">
-
-    <section class="logo-section">
-        <img src="ruta_a_tu_logo.png" alt="Logo Instituto San Gabriel" class="logo-image">
-    </section>
+    <div class="logo-container">
+        <img src="imagen.porta/imagen1.png" alt="Logo Instituto San Gabriel" class="main-logo-image">
+    </div>
 
     <section class="hero">
         <a href="paguina_inicio.html" class="link-button">INGRESAR</a>
